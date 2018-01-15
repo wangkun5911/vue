@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" style="opacity:0;">
+<head>
+  <title>华方云HIS</title>
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link href="../clinic/src/img/favicon.ico" rel="shortcut icon">
+  <meta charset="UTF-8">
+  <meta name="keywords" content="关键词">
+  <meta name="description" content="描述" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+  <link rel="stylesheet" href="./src/css/login.css?version=7a3e4dbacb539ae1ad76">
+  <link rel="stylesheet" href="./src/lib/base/font/iconfont.css?version=7a3e4dbacb539ae1ad76">
+</head>
+<body>
+  <div class="login_bg">
+    <img src="./src/img/login_logo.png" />
+  </div>
+  <div class="login_box" id="loginBox">
+    <h1>欢迎登录华方智慧云诊所－华方云HIS</h1>
+    <form class="form_list" onsubmit = 'return'>
+      <div class="login_box_list">
+        <label for="usename">账&nbsp;&nbsp;号：<br />
+                              Account:
+        </label>
+        <div class="usename">
+          <input type="text" maxlength="11" placeholder="请输入账号" id="usename" name="usename" onkeydown=keyDown() />
+        </div>
+      </div>
+      <div class="login_box_list">
+        <label for="pwd">密&nbsp;&nbsp;码：<br />
+                              Password:
+        </label>
+        <div class="pwd">
+          <input type="password" placeholder="请输入密码" id="pwd" name="pwd" onkeydown=keyDown() />
+        </div>
+      </div>
+      <div class="login_box_list">
+        <label for="pwd">Language:</label>
+        <div class="langwrap">
+          <label><input type="radio" name="lang" value="1" checked="checked" class="lang" />中文</label>
+          <label style="margin-left:.1rem;"><input type="radio" name="lang" value="2" class="lang" />English</label>
+        </div>
+      </div>
+      <div class="login_box_c">
+        <!--<label><input type="checkbox" />记住密码</label>-->
+        <a id="forgetPsd" href="javascript:;"><i class="iconfont">&#xe626;</i>忘记密码？</a>
+      </div>
+      <div class="submit_btn">
+        <i class="login_btn">登录</i>
+      </div>
+      <p style="text-align: right; font-size: 14px; color: #666; margin-top: 20px;"><i class="iconfont icon--" style="font-size: 13px; margin-right: 5px;"></i>服务热线：400-900-1515</p>
+    </form>
+  </div>
+
+  <div class="Qcode_wrapper">
+    <div class="Qcode">
+      <div class="Qcode_icon">
+        <img src="./src/img/cloudClinic.png">
+        <p>华方云诊所APP</p>
+      </div>
+      <div class="Qcode_icon">
+        <img src="./src/img/shequ.png">
+        <p>华方基层e疗社区(微信)</p>
+      </div>
+      <div class="Qcode_icon">
+        <img src="./src/img/jujiayihu.png">
+        <p>居家医护(微信)</p>
+      </div>
+    </div>
+  </div>
+  <!--选择诊所页面的元素-->
+  <!--返回按钮-->
+  <div class="login_bg login_bg2" style="display:none">
+    <a class="goback" href="clinicLogin.html">返回登录</a>
+  </div>
+  <!--选择诊所-->
+  <div class="login_box login_box2" style="display:none">
+    <h1>诊所选择</h1>
+    <div class="form_list">
+      <ul class="clinic_select">
+      </ul>
+      <div class="submit_btn" style="margin-top: .3rem">
+        <p>登录</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 诊所登录密码重置模块-->
+  <div class="login_box pwdreset" id="resetPwdBox">
+    <h1>重置密码</h1>
+    <div class="form_list">
+      <div class="login_box_list">
+        <label for="">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
+        <div style="line-height: .42rem;">
+        <input type="text" id="reUserName" disabled>
+        </div>
+      </div>
+      <!-- <div class="login_box_list">
+        <label for="">验&nbsp;证&nbsp;&nbsp;码：</label>
+        <div class="yzm">
+          <input type="text" placeholder="验证码" name="yzm" id="yzm" disabled />
+        </div>
+        <p>发送验证码<br /><span>60</span>s</p>
+      </div> -->
+      <div class="login_box_list">
+        <label for="">新&nbsp;密&nbsp;&nbsp;码：</label>
+        <div class="pwd">
+          <input type="password" placeholder="请输入密码" name="pwd" id="newPwd" />
+        </div>
+      </div>
+      <div class="login_box_list">
+        <label for="">确认密码：</label>
+        <div class="pwd">
+          <input type="password" placeholder="请再次输入密码" name="pwdSure" id="pwdSure" />
+        </div>
+      </div>
+      <div class="submit_btn">
+        <i class="resetPwdBtn">确  定</i>
+        <i class="qx">取  消</i>
+      </div>
+    </div>
+  </div>
+  <!--重置密码信息提示-->
+  <div class="page_bg"></div>
+  <div class="prompt_box" style="display: none">
+    <p>首次登录系统，请重置密码！</p>
+    <i>确  定</i>
+  </div>
+  <div id="footer">
+    <p>©2016 HOFON 版权所有 浙ICP备07025272号-3</p>
+  </div>
+  <script src="./src/lib/base/jquery-1.11.3.min.js?version=7a3e4dbacb539ae1ad76"></script>
+  <script src="./src/lib/base/jQuery.md5.js?version=7a3e4dbacb539ae1ad76"></script>
+  <script src="./src/lib/base/rem.js?version=7a3e4dbacb539ae1ad76"></script>
+  <script src="./src/lib/base/jquery.cookie.js?version=7a3e4dbacb539ae1ad76"></script>
+  <script src="./src/lib/js/common.js?version=7a3e4dbacb539ae1ad76"></script>
+  <script>
+    //初始化页面时验证是否记住了密码
+    $(document).ready(function() {
+        $("#usename").val($.cookie("userName"));
+        $("#forgetPsd").click(function(){
+            window.location.href=pageUrl+'agencyPwdReset.html?usename='+$("#usename").val();
+        })
+    });
+      var userName = "";
+      //取消重置密码弹出框
+      $(".prompt_box i").click(function() {
+        $(".page_bg").hide();
+        $(".prompt_box").hide();
+      })
+      //密码重置的确定按钮
+      $(".resetPwdBtn").click(function(){
+
+        if($("#newPwd").val() == ""){
+          $.messageBox({type:"error",msg:"新密码不能为空"});
+          return false;
+        }
+        if($("#pwdSure").val() == ""){
+          $.messageBox({type:"error",msg:"请输入确认密码"});
+          return false;
+        }
+        // if($("#yzm").val() == ""){
+        //   $.messageBox({type:"error",msg:"请输入验证码"});
+        //   return false;
+        //密码6-10位可见字符检测
+        var reg2 = /^( )+|^[\s　]+|( )+$|[\s　]+$/g;
+        if( $("#newPwd").val().length < 6 || $("#newPwd").val().length > 10 ){
+          $.messageBox({type:"error",msg:"请输入由6~10的可见字符组成的密码"});
+          return false;
+        }
+        if(reg2.test($("#newPwd").val()==true)){
+          $.messageBox({type:"error",msg:"新密码不能有空格"})
+          return false;
+        };
+        if($("#pwdSure").val() != $("#newPwd").val()){
+          $.messageBox({type:"error",msg:"两次输入的密码不一致"})
+          return false
+        }
+        $.ajax({
+          type:"POST",
+          contentType:'application/json',
+          url:ajaxUrl+"clinic/user/updatePassword",
+          dataType:'json',
+          data:JSON.stringify({"confirmPassword":$.md5($("#pwdSure").val()),"mobile":userName,"newPassword":$.md5($("#newPwd").val())}),
+          success:function(response){
+            if(response.errorCode != 0){
+              $.messageBox({type:"error",msg:response.errorMessage});
+              return false;
+            }else{
+              $.messageBox({type:"error",msg:"修改成功，请重新登入"})
+              $("#usename").val(userName);
+              $("#pwd").val("");
+              $("#resetPwdBox").hide();
+              $("#loginBox").show();
+              $(".Qcode_wrapper").show();
+            }
+          }
+        })
+      });
+
+      //点击提交
+      $(".submit_btn .login_btn").click(function(){
+        submit();
+      });
+      function keyDown(){
+        if(event.keyCode == 13){
+          submit();
+        }
+      };
+      function submit(){
+        //手机号，密码不能为空
+        if($('#usename').val() == ''||$('#pwd').val() == ''){
+          $.messageBox({type:"error",msg:"帐号或密码不能为空"});
+          return false;
+        }
+        //验证手机号码的11位数
+        var reg1 = /^1[3|4|5|7|8]\d{9}$/g;
+        if(reg1.test( $('#usename').val()) == false){
+          $.messageBox({type:"error",msg:"请输入正确的11位帐号"});
+          return false;
+        };
+        //密码6-10位可见字符检测
+        var reg3 = /^( )+|^[\s　]+|( )+$|[\s　]+$/g;
+        if( $("#pwd").val().length < 6 || $("#pwd").val().length > 10 || reg3.test($("#pwd").val()==true) ){
+          $.messageBox({type:"error",msg:"请输入由6~10的可见字符组成的密码,不能为空格"});
+          return false;
+        }
+        //记住密码
+        userName = $("#usename").val(); //全局变量
+        var passWord = $.md5($("#pwd").val()); //密码加密
+        $.cookie("userName", userName, { expires: 7 }); // 存储一个带7天期限的 cookie
+        
+        //语言选择
+        var lang = $(".lang:checked").val();
+        //表单提交
+        if($('#usename').val() != '' && $('#pwd').val() != ''){
+          $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: ajaxUrl+"clinic/user/login",
+            dataType: 'json',
+            data:JSON.stringify({"mobile":userName,"password":passWord}),
+            success: function(msg) {
+              //重置密码功能
+              if(msg.errorCode == 100049){
+                $.messageBox({type:"error",msg:"当前使用的是系统密码，请及时修改密码!"})
+                setTimeout(function(){
+                  $("#reUserName").val(userName);//帐号 传过去
+                  $("#resetPwdBox").show();
+                  $("#loginBox").hide();
+                  $(".Qcode_wrapper").hide();
+                },1000)
+                return false;
+              };
+
+              if(msg.errorCode!=0){
+                  $.messageBox({type:"error",msg:msg.errorMessage});
+                  return;
+                  //诊所数量判断
+              }else if(msg.data.listVO.length == 1){
+                    $.cookie("X-Clinic-ID",msg.data.listVO[0].clinicId,{ expires: 7, path: '/' });
+                    var list1 = msg.data.listVO[0];
+                    //诊所数量一个时发送请求
+                    $.ajax({
+                      type:"POST",
+                      url:ajaxUrl+"clinic/user/selectClinic",
+                      data:JSON.stringify(list1),
+                      success:function(response){
+                        $.cookie("X-User-ID-Clinic",response.data.userId,{ expires: 7, path: '/' });
+                        $.cookie("X-Long-Token-Clinic",response.data.token,{ expires: 7, path: '/' });
+                        //储存自己的融云token和userId，为会诊做准备
+                        $.cookie("X-Long-rongCloudToken-Clinic",response.data.rongCloudToken,{ expires: 7, path: '/' });
+                        //储存自己的融云token，为视频做准备
+                        $.cookie("X-Long-rongCloudToken-Clinic2",response.data.rongCloudToken2,{ expires: 7, path: '/' });
+                        //储存用户名，密码,为获取融云token做准备
+                        $.cookie("X-Long-userName-Clinic",userName,{ expires: 7, path: '/' });
+                        $.cookie("X-Long-passWord-Clinic",$("#pwd").val(),{ expires: 7, path: '/' });
+                        //语言选择,让内页可以用
+                        localStorage.setItem("lang",lang||1);
+                        //设置全局属性video，已经关闭，在线咨询和远程会诊可以启动
+                        localStorage.setItem("video","off");
+                        window.location.href=pageUrl+'index.html';
+                      }
+                    });
+                    //诊所数量大于一个
+              }else{
+                    $('.login_bg').hide();
+                    $('.login_bg2').show();
+                    $('.login_box').hide();
+                    $('.login_box2').show();
+                    var data = msg.data.listVO;
+                    for(var i=0;i<data.length;i++){
+                      $('.clinic_select').append("<li><span>"+data[i].clinicName+"</span><i class='iconfont'>&#xe67b;</i></li>")
+                    }
+                    var num;
+                    //诊所选择的点击事件
+                    $(".clinic_select li").click(function() {
+                        num = $(this).index();
+                        $(this).siblings().removeClass("cur_li");
+                        $(this).addClass("cur_li");
+                    });
+                    //选择诊所后点击确定按钮
+                    $('.submit_btn').click(function(){
+                      var Id = data[num].clinicId;
+                      $.cookie("X-Clinic-ID",Id,{ expires: 7, path: '/' });
+                      var list = msg.data.listVO[num];
+                      //选择诊所后发送请求
+                      $.ajax({
+                        type:"POST",
+                        url:ajaxUrl+"clinic/user/selectClinic",
+                        data:JSON.stringify(list),
+                        success:function(response){
+                          $.cookie("X-User-ID-Clinic",response.data.userId,{ expires: 7, path: '/' });
+                          $.cookie("X-Long-Token-Clinic",response.data.token,{ expires: 7, path: '/' });
+                          //储存自己的融云token和userId，为会诊做准备
+                          $.cookie("X-Long-rongCloudToken-Clinic",response.data.rongCloudToken,{ expires: 7, path: '/' });
+                          //储存自己的融云token，为视频做准备
+                          $.cookie("X-Long-rongCloudToken-Clinic2",response.data.rongCloudToken2,{ expires: 7, path: '/' });
+                          //储存用户名，密码,为获取融云token做准备
+                          $.cookie("X-Long-userName-Clinic",userName,{ expires: 7, path: '/' });
+                          $.cookie("X-Long-passWord-Clinic",$("#pwd").val(),{ expires: 7, path: '/' });
+                          //语言选择,让内页可以用
+                          localStorage.setItem("lang",lang||1);
+                          //设置全局属性video，已经关闭，在线咨询和远程会诊可以启动
+                          localStorage.setItem("video","off");
+                          window.location.href=pageUrl+'index.html';
+                        }
+                      });
+                    })
+                }
+              }
+            })
+          };
+        }
+  </script>
+</body>
+</html>

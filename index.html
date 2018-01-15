@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" style="opacity:0;">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title id="indexHtml">华方云HIS</title>
+    <link href="../clinic/src/img/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="./src/lib/base/rongyun/jqueryrebox/jquery-rebox-0.1.0.css"/>
+    <link rel="stylesheet" type="text/css" href="./src/lib/base/rongyun/RongIMWidget.css"/>
+    <link rel="stylesheet" type="text/css" href="./src/lib/base/rongyun/main.css"/>
+    <link rel="stylesheet" href="./src/lib/js/pagination/pagination.css?version=7a3e4dbacb539ae1ad76" />
+    <link rel="stylesheet" href="./src/css/jqueryui.css?version=7a3e4dbacb539ae1ad76">
+    <link rel="stylesheet" href="./src/lib/base/select2/select2.min.css?version=7a3e4dbacb539ae1ad76">
+    <link rel="stylesheet" href="./src/lib/base/datetimepicker/jquery.datetimepicker.min.css?version=7a3e4dbacb539ae1ad76">
+    <link rel="stylesheet" href="./src/lib/base/font/iconfont.css?version=7a3e4dbacb539ae1ad76">
+    <link rel="stylesheet" href="./src/lib/base/printArea/PrintArea.css?version=7a3e4dbacb539ae1ad76">
+    <link rel="stylesheet" href="./src/lib/base/fancybox/jquery.fancybox.min.css?version=7a3e4dbacb539ae1ad76">
+  	<link rel="stylesheet" href="./src/css/style-treatment.css?version=7a3e4dbacb539ae1ad76" />
+  	
+    <script src="./src/lib/base/jquery-1.11.3.min.js?version=7a3e4dbacb539ae1ad76"></script>
+  	<script src="./src/lib/base/rem.js?version=7a3e4dbacb539ae1ad76"></script>
+  	<script src="./src/lib/base/jquery.cookie.js?version=7a3e4dbacb539ae1ad76"></script>
+  	<script src="./src/lib/js/pagination/pagination.min.js?version=7a3e4dbacb539ae1ad76"></script>
+  	<script src="./src/lib/js/common.js?version=7a3e4dbacb539ae1ad76"></script>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <myheader></myheader>
+      <div class="clinic_mian">
+        <!--侧边栏导航-->
+          <nav class="clinic_sidebar">
+            <!-- <router-link to="/securityCenter"><i class="iconfont icon-anquan"></i>权限管理</router-link>
+            <router-link to="/clinicManage"><i class="iconfont icon-xiaozhensuo"></i>诊所管理</router-link>
+            <router-link to="/serviceItemSettings"><i class="iconfont icon-shezhi"></i>服务项目设置</router-link>
+            <router-link to="/medicineManage"><i class="iconfont icon-yaopin-copy"></i>药品信息管理</router-link>
+            <router-link to="/reportManage"><i class="iconfont icon-baobiao"></i>报表管理</router-link>
+            <router-link to="/reservation"><i class="iconfont icon-lease-resv-2home"></i>预约管理</router-link>
+            <router-link to="/appointManage"><i class="iconfont icon-jiankangdangan"></i>信息登记</router-link>
+            <router-link to="/admission"><i class="iconfont icon-27"></i>接诊</router-link>
+            <router-link to="/invoiceNumberManage"><i class="iconfont icon-fapiaoguanli"></i>发票号管理</router-link>
+            <router-link to="/chargeSettle"><i class="iconfont icon-pgjs-copy"></i>收费结算</router-link>
+            <router-link to="/drugManage"><i class="iconfont icon-yaodian"></i>发药管理</router-link>
+            <router-link to="/pharmacyManage"><i class="iconfont icon-yaofangpharmacy9"></i>药房管理</router-link>
+            <router-link to="/patientInforBase"><i class="iconfont icon-7yuyuedingdanwudingdan"></i>患者信息库</router-link> -->
+             
+            <router-link v-for="el in copyRight" :to="'/'+el.url"><i class="iconfont" :class="'icon-'+icon_data[el.name]"></i><i :id="icon_data[el.name]">{{el.name}}</i> <span :class="icon_data[el.name]">{{el.name=='远程会诊'?$store.state.waitReadNums:''}}</span></router-link>
+          </nav>
+          <router-view v-cloak></router-view>
+      </div>
+      <videomsg></videomsg>
+    </div>
+    <!--远程会诊-->
+    <div id="remoteBox">
+        <div id="remote">
+            <div id="remoteController" ng-controller="remoteController">
+               <rong-widget></rong-widget>
+            </div>
+        </div>
+    </div>
+    <!--远程会诊-视频-->
+    <!-- <div class="video_wrapper" style="opacity:0;z-index:-1;display: none;">
+      <div class="wrapper" style="visibility: visible;">
+        <div id="main"></div>
+
+        <input type="button" value="视频通话" id="video">
+        <input type="button" value="音频通话" id="audio">
+
+        <input type="button" value="视频转音频" id="convert">
+        <input type="button" value="静音" id="mute">
+
+        <input type="button" value="接通视频" id="acceptVideo">
+        <input type="button" value="接通音频" id="acceptAudio">
+        <input type="button" value="取消视频" id="cancelVideo">
+        <input type="button" value="挂断" id="hungup">
+        <input type="button" value="窗口切换" id="switchVideoWindows">
+        <a href="" target="_blank" id="medicalHistory">就诊历史</a>
+        <div class="narrow">缩小视频</div>
+        <div class="enlarge">放大视频</div>
+      </div>
+    </div> -->
+    <!--远程会诊-视频-->
+    <!--远程会诊-视频-->
+    <div class="video_wrapper" style="opacity:0;z-index:-1;display: none;">
+      <div class="wrapper" style="visibility: visible;">
+        <div id="video" style="margin:0 auto;">
+            <div id="agora_local" class="agora_local"></div>
+        </div>
+        <input type="button" value="" id="join" />
+        <input type="button" value="" id="leave" />
+        <input type="button" value="" class="newvideo videoDisable"  />
+        <input type="button" value="" class="newaudio audioDisable" />
+        <!-- <a href="" target="_blank" id="medicalHistory">就诊历史</a> -->
+      </div>
+    </div>
+    <!--远程会诊-视频-->
+    <!--远程会诊-->
+    <!--在线咨询-->
+    <div id="rongyunBox">
+        <div id="onLineBox">
+            <div id="onLine" ng-controller="onLine">
+               <rong-widget></rong-widget>
+            </div>
+        </div>
+    </div>
+    <!--在线咨询-->
+    <div id="page_footer">
+      <p>©2016 HOFON 版权所有 浙ICP备07025272号-3</p>
+    </div>
+    <script src="./src/lib/base/jqueryui.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/select2/select2.full.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/china.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/datetimepicker/jquery.datetimepicker.full.min.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/printArea/jquery.PrintArea.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/upload/spark-md5.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/upload/async.min.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/upload/lib/upyun-mu.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/fancybox/jquery.fancybox.min.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/pdfobject.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/highcharts.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/jquery.media.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./dist/build.js?version=7a3e4dbacb539ae1ad76"></script> 
+    <!-- his-pc-远程会诊，患者咨询模块 -->
+    <!-- <script src="./src/lib/base/rongyun/jquery-2.2.2.js"></script> -->
+    <script src="./src/lib/base/rongyun/angular-1.4.8.js"></script>
+
+    <!-- 融云IMLib -->
+    <!--<script src="http://cdn.ronghub.com/RongIMLib-2.2.7.min.js"></script> -->
+    <script src="./src/lib/base/rongyun/RongIMLib227.min.js"></script>
+    <script src="./src/lib/base/rongyun/RongEmoji-2.2.5.min.js"></script>
+    <script src="./src/lib/base/rongyun/Libamr-2.2.5.min.js"></script>
+    <script src="./src/lib/base/rongyun/RongIMVoice-2.2.5.min.js"></script>
+
+    <!-- 上传插件 -->
+    <script src="./src/lib/base/rongyun/plupload.full.min-2.1.1.js"></script>
+    <script src="./src/lib/base/rongyun/qiniu-1.0.17.js"></script>
+
+    <!-- 增强体验插件 -->
+    <script src="./src/lib/base/rongyun/jqueryrebox/jquery-rebox-0.1.0.js"></script>
+
+    <!-- IM插件 -->
+    <script src="./src/lib/base/rongyun/RongIMWidget.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/rongyun/common.js?version=7a3e4dbacb539ae1ad76"></script>
+    <script src="./src/lib/base/rongyun/index.js?version=7a3e4dbacb539ae1ad76"></script>
+    <!-- his-pc-远程会诊，患者咨询模块 -->
+    <!--远程会诊-视频-->
+    <!--<script src="./src/lib/base/video/protobuf-2.2.7.min.js"></script>
+    <script src="./src/lib/base/video/AgoraRtcAgentSDK-1.4.2.js"></script>
+    <script src="./src/lib/base/video/jquery-3.1.1.js"></script>
+    <script src="./src/lib/base/video/RongIMLib-2.2.5.min.js"></script>
+    <script src="./src/lib/base/video/RongCallLib-2.3.0.min.js"></script>
+    <script src="./src/lib/base/video/init.js?version=7a3e4dbacb539ae1ad76"></script>
+    -->
+    <!--远程会诊-视频-->
+    <!--远程会诊-视频-new-->
+    <script src="./src/lib/base/video/AgoraRTCSDK-1.14.0.js"></script>
+    <script src="./src/lib/base/video/newVedio.js?version=7a3e4dbacb539ae1ad76"></script>
+    <!--远程会诊-视频-new-->
+  </body>
+</html>
